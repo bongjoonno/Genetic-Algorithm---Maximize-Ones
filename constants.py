@@ -1,0 +1,1 @@
+GENE_LENGTH = 10
