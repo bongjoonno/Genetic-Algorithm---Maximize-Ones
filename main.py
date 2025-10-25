@@ -4,10 +4,13 @@ from repopulate import repopulate
 
 population = generate_population(POPULATION_SIZE)
 
-population_by_fitness_scores = sorted(population, key = lambda gene: gene.count('1'))
+for _ in range(10):
+    population_by_fitness_scores = sorted(population, key = lambda gene: gene.count('1'))
 
-top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
+    top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
-children = repopulate(top_50_percent)
+    children = repopulate(top_50_percent)
 
-# repopulate
+    population = top_50_percent.extend(children)
+
+print(population)
