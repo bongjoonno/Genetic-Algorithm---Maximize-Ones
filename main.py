@@ -10,6 +10,4 @@ top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
 children = repopulate(top_50_percent)
 
-for 
-
 # repopulate
