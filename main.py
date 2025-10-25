@@ -1,5 +1,6 @@
 from constants import POPULATION_SIZE
 from generate_population import generate_population
+from repopulate import repopulate
 
 population = generate_population(POPULATION_SIZE)
 
@@ -7,5 +8,8 @@ population_by_fitness_scores = sorted(population, key = lambda gene: gene.count(
 
 top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
+children = repopulate(top_50_percent)
+
+for 
 
 # repopulate
