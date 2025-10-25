@@ -7,8 +7,5 @@ population_by_fitness_scores = sorted(population, key = lambda gene: gene.count(
 
 top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
-print(len(population_by_fitness_scores), len(population), len(top_50_percent))
-
-# eliminate 50% of population
 
 # repopulate
