@@ -1,1 +1,1 @@
-from random import choice, shuffle
+from random import choice, shuffle, randint
