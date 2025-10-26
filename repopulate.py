@@ -1,13 +1,13 @@
 from constants import GENE_LENGTH, HALF_GENE_LENGTH
 from imports import shuffle, randint
 
-def repopulate(parents, split_method):
+def repopulate(parents, gene_split_method):
     shuffle(parents)
 
     children = []
 
     for i in range(0, len(parents) - 1, 2):
-        child_a, child_b = create_children(*split_method(parents[i], parents[i+1]))
+        child_a, child_b = create_children(*gene_split_method(parents[i], parents[i+1]))
         children.extend([child_a, child_b])
     
     return children
