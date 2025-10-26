@@ -2,8 +2,7 @@ from constants import POPULATION_SIZE, PERFECT_POPULATION
 from repopulate import repopulate
 
 def genetic_evolution(population, gene_split_method):
-    epochs = 0
-    epochs_w_no_progress = 0
+    epochs, epochs_w_no_progress = 0, 0
     
     while population != PERFECT_POPULATION:
         total_1s = sum(gene.count('1') for gene in population)
