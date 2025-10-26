@@ -1,8 +1,6 @@
-from imports import randint
+from repopulate import split_genes_random
 
-gene = '1234'
 
-split_point = randint(1, len(gene))
+a, b, c, d = split_genes_random('1234', 'abcd')
 
-print(split_point)
-
+print(a, b, c, d)
