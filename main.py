@@ -1,8 +1,8 @@
 from constants import POPULATION_SIZE, GENE_LENGTH
 from generate_population import generate_population
-from repopulate import repopulate
+from repopulate import repopulate, split_genes_middle, split_genes_random
 
-perfect_population = ['1'*GENE_LENGTH for _ in range(POPULATION_SIZE)]
+perfect_population = ['1' * GENE_LENGTH for _ in range(POPULATION_SIZE)]
 
 population = generate_population(POPULATION_SIZE)
 
@@ -16,7 +16,7 @@ for _ in range(1_000_000):
 
         top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
-        children = repopulate(top_50_percent)
+        children = repopulate(top_50_percent, split_genes_middle)
 
         population = top_50_percent + children
         epochs += 1
@@ -37,10 +37,10 @@ AVG_CONVERGENCE = 8
 '''
 
 '''
-??? CROSSOVER
+RANDOM POINT CROSSOVER
 POPULATION_SIZE = 500
 GENE_LENGTH = 10
 HALF_GENE_LENGTH = GENE_LENGTH // 2
 
-AVG_CONVERGENCE = ???
+AVG_CONVERGENCE = 8
 '''
