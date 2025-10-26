@@ -16,7 +16,7 @@ for _ in range(1_000_000):
 
         top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
-        children = repopulate(top_50_percent, split_genes_middle)
+        children = repopulate(top_50_percent, split_genes_random)
 
         population = top_50_percent + children
         epochs += 1
@@ -26,21 +26,3 @@ for _ in range(1_000_000):
 average_convergence = sum(convergence_times) / len(convergence_times)
 
 print(average_convergence)
-
-'''
-SIMPLE MIDDLE CROSSOVER
-POPULATION_SIZE = 500
-GENE_LENGTH = 10
-HALF_GENE_LENGTH = GENE_LENGTH // 2
-
-AVG_CONVERGENCE = 8
-'''
-
-'''
-RANDOM POINT CROSSOVER
-POPULATION_SIZE = 500
-GENE_LENGTH = 10
-HALF_GENE_LENGTH = GENE_LENGTH // 2
-
-AVG_CONVERGENCE = 8
-'''
