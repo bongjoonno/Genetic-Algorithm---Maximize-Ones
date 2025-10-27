@@ -54,4 +54,4 @@ def main():
 if __name__ == '__main__':
     gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences = main()
     
-    generate_charts([gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences])
+    generate_charts(gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences)
