@@ -1,11 +1,14 @@
-from constants import POPULATION_SIZE, GENE_LENGTH, CUR_PATH
+from constants import POPULATION_SIZE
+from imports import Path
 
-def log(average_convergence):
-    with CUR_PATH.open('a') as f:
+LOGGING_PATH = Path.cwd() / 'log.txt'
+
+def log(average_convergence, gene_split_method, gene_length):
+    with LOGGING_PATH.open('a') as f:
         f.write(f'''
-RANDOM POINT CROSSOVER
+{gene_split_method}
 POPULATION_SIZE = {POPULATION_SIZE}
-GENE_LENGTH = {GENE_LENGTH}
+GENE_LENGTH = {gene_length}
 AVG_CONVERGENCE = {average_convergence}
 
 ''')
