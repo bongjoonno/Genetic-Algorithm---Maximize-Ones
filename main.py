@@ -4,6 +4,8 @@ from generate_population import generate_population
 from repopulate import split_genes_middle, split_genes_random
 from genetic_evolution import genetic_evolution
 from log import create_file_path, save_dicts_to_yaml
+from generate_charts import generate_charts
+
 
 # Length of Gene must be > 2 as parental splitting is not possible without at least one gene per parent (e.g. at least 2)
 MINIMUM_GENE_LENGTH = 2
@@ -51,3 +53,5 @@ def main():
 
 if __name__ == '__main__':
     gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences = main()
+    
+    generate_charts([gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences])
