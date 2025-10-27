@@ -1,5 +1,4 @@
 from imports import choice
-from constants import GENE_LENGTH
 
 def generate_population(population_size, gene_length):
     population = []
