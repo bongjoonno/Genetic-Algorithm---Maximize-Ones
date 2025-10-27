@@ -1,17 +1,14 @@
-from constants import POPULATION_SIZE
-from imports import Path
+from imports import Path, json
 
-LOGGING_PATH = Path.cwd() / 'log.txt'
+LOGGING_DIRECTORY = str(Path.cwd())
 
-def log(average_convergence, gene_split_method, gene_length):
-    with LOGGING_PATH.open('a') as f:
-        f.write(f'''
-{gene_split_method}
-POPULATION_SIZE = {POPULATION_SIZE}
-GENE_LENGTH = {gene_length}
-AVG_CONVERGENCE = {average_convergence}
+def create_file_path(gene_length_low, gene_length_high, gene_split_method):
+    return f'{LOGGING_DIRECTORY}\\{gene_length_low}-{gene_length_high} {gene_split_method}.json'
 
-''')
+def save_dicts_to_json(file_path, gene_to_convergence_dict):
+    with open(file_path, 'w') as f:
+        json.dump(gene_to_convergence_dict, f)
+
 
 if __name__ == '__main__':
-    log(5)
+    print(create_file_path(0, 100, 'random'))
