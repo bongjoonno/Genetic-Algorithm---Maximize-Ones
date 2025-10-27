@@ -18,7 +18,7 @@ def genetic_evolution(population, perfect_population, gene_split_method, gene_le
         if total_1s == sum(gene.count('1') for gene in population):
             epochs_w_no_progress += 1
         if epochs_w_no_progress == 100:
-            return -1
+            return 0
 
         epochs += 1
     
