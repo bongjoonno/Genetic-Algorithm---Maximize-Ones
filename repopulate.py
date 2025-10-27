@@ -1,4 +1,4 @@
-from imports import shuffle, randint
+from imports import shuffle, randint, choice
 
 def repopulate(parents, gene_split_method, gene_length):
     shuffle(parents)
@@ -23,11 +23,17 @@ def create_children(
     return child_a, child_b
 
 def split_genes_middle(parent_a, parent_b, gene_length):
-    first_half_parent_a = parent_a[:gene_length//2]
-    second_half_parent_a = parent_a[gene_length//2:]
+    if gene_length % 2:
+        # so crossover does not favor left or right side more in odd gene lengths
+        split_point = choice([gene_length//2, (gene_length//2) + 1])
+    else:
+        split_point = gene_length // 2
 
-    first_half_parent_b = parent_b[:gene_length//2]
-    second_half_parent_b = parent_b[gene_length//2:]
+    first_half_parent_a = parent_a[:split_point]
+    second_half_parent_a = parent_a[split_point:]
+
+    first_half_parent_b = parent_b[:split_point]
+    second_half_parent_b = parent_b[split_point:]
     
     return (first_half_parent_a,
            first_half_parent_b,
