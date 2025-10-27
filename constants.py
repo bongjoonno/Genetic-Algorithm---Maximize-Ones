@@ -1,8 +1,4 @@
 from imports import Path
 
 POPULATION_SIZE = 500
-GENE_LENGTH = 20
-HALF_GENE_LENGTH = GENE_LENGTH // 2
-
-PERFECT_POPULATION = ['1'*GENE_LENGTH for _ in range(POPULATION_SIZE)]
-CUR_PATH = Path.cwd() / 'log.txt'
+MAIN_DIRECTORY = str(Path.cwd())
