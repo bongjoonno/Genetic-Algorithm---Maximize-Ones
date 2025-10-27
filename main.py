@@ -1,46 +1,14 @@
-from constants import POPULATION_SIZE, GENE_LENGTH
+from constants import POPULATION_SIZE
 from generate_population import generate_population
-from repopulate import repopulate
+from repopulate import split_genes_middle, split_genes_random
+from genetic_evolution import genetic_evolution
 
-perfect_population = ['1'*GENE_LENGTH for _ in range(POPULATION_SIZE)]
-
-population = generate_population(POPULATION_SIZE)
-
-epochs = 0
-
-convergence_times = []
-
-for _ in range(1_000_000):
-    while population != perfect_population:
-        population_by_fitness_scores = sorted(population, key = lambda gene: gene.count('1'))
-
-        top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
-
-        children = repopulate(top_50_percent)
-
-        population = top_50_percent + children
-        epochs += 1
+def main():
+    population = generate_population(POPULATION_SIZE)
+    convergence_for_middle_split = genetic_evolution(population, split_genes_middle)
+    convergence_for_random_split = genetic_evolution(population, split_genes_random)
     
-    convergence_times.append(epochs)
+    return convergence_for_middle_split, convergence_for_random_split
 
-average_convergence = sum(convergence_times) / len(convergence_times)
-
-print(average_convergence)
-
-'''
-SIMPLE MIDDLE CROSSOVER
-POPULATION_SIZE = 500
-GENE_LENGTH = 10
-HALF_GENE_LENGTH = GENE_LENGTH // 2
-
-AVG_CONVERGENCE = 8
-'''
-
-'''
-??? CROSSOVER
-POPULATION_SIZE = 500
-GENE_LENGTH = 10
-HALF_GENE_LENGTH = GENE_LENGTH // 2
-
-AVG_CONVERGENCE = ???
-'''
+if __name__ == '__main__':
+    print(main())
