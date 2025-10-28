@@ -16,7 +16,7 @@ def main():
     gene_length_to_random_split_mutate_convergences) = {}, {}, {}
 
     gene_length_low = MINIMUM_GENE_LENGTH
-    gene_length_high = 1000
+    gene_length_high = 750
     step_size = 5
 
     for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):
