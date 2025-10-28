@@ -20,12 +20,10 @@ def main():
     step_size = 5
 
     for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):
-        file_paths = []
-        
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
         perfect_chromosome = '1'*gene_length
         
-        for i, dict in enumerate(gene_length_to_convergences):
+        for i in range(len(gene_length_to_convergences)):
             gene_length_to_convergences[i][gene_length] = genetic_evolution(population = population, 
                                                                             perfect_chromosome = perfect_chromosome,
                                                                             gene_split_method = gene_split_methods_funcs[i], 
@@ -33,15 +31,19 @@ def main():
                                                                             mutate_children = mutate_children[i])
             
         
-        for i in range(len(GENETIC_OPERATORS)):
-            file_path = (create_file_path(gene_length_low = gene_length_low,
-                                          gene_length_high = gene_length_high,
-                                          gene_split_method = GENETIC_OPERATORS[i]))
-            
-            save_dicts_to_yaml(file_path = file_path, 
-                               gene_to_convergence_dict = gene_length_to_convergences[i])
+    for i in range(len(GENETIC_OPERATORS)):
+        file_path = (create_file_path(gene_length_low = gene_length_low,
+                                        gene_length_high = gene_length_high,
+                                        gene_split_method = GENETIC_OPERATORS[i]))
+        
+        save_dicts_to_yaml(file_path = file_path, 
+                            gene_to_convergence_dict = gene_length_to_convergences[i])
 
     return gene_length_to_convergences
 
 if __name__ == '__main__':
     generate_charts(main())
+    
+    
+
+# include mutation in normal crossover so model does not have to do extra work
