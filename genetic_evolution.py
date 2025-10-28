@@ -15,7 +15,7 @@ def genetic_evolution(population, perfect_population, gene_split_method, gene_le
         children = repopulate(top_50_percent, gene_split_method, gene_length)
         
         if mutate_children:
-            children = mutate(children)
+            children = mutate(children, gene_length-1)
 
         population = top_50_percent + children
         
