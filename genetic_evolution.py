@@ -1,7 +1,7 @@
 from constants import POPULATION_SIZE
 from repopulate import repopulate
 
-def genetic_evolution(population, perfect_population, gene_split_method, gene_length):
+def genetic_evolution(population, perfect_population, gene_split_method, gene_length, mutate: bool):
     epochs, epochs_w_no_progress = 0, 0
     
     while population != perfect_population:
