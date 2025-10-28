@@ -16,8 +16,8 @@ def main():
     gene_length_to_convergences = [{}, {}, {}, {}]
 
     gene_length_low = MINIMUM_GENE_LENGTH
-    gene_length_high = 750
-    step_size = 5
+    gene_length_high = 1_000
+    step_size = 10
 
     for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
@@ -43,7 +43,3 @@ def main():
 
 if __name__ == '__main__':
     generate_charts(main())
-    
-    
-
-# include mutation in normal crossover so model does not have to do extra work

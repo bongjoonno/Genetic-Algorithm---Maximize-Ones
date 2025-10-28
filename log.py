@@ -1,4 +1,4 @@
-from imports import Path, yaml
+from imports import yaml
 from constants import MAIN_DIRECTORY
 
 LOGGING_DIRECTORY = f'{MAIN_DIRECTORY}\\convergence data\\'
