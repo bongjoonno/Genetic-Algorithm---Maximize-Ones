@@ -1,7 +1,8 @@
 from constants import POPULATION_SIZE
 from repopulate import repopulate
+from mutate import mutate
 
-def genetic_evolution(population, perfect_population, gene_split_method, gene_length, mutate: bool):
+def genetic_evolution(population, perfect_population, gene_split_method, gene_length, mutate_children: bool):
     epochs, epochs_w_no_progress = 0, 0
     
     while population != perfect_population:
@@ -12,6 +13,9 @@ def genetic_evolution(population, perfect_population, gene_split_method, gene_le
         top_50_percent = population_by_fitness_scores[POPULATION_SIZE//2:]
 
         children = repopulate(top_50_percent, gene_split_method, gene_length)
+        
+        if mutate_children:
+            children = mutate(children)
 
         population = top_50_percent + children
         
