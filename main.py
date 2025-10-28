@@ -11,9 +11,9 @@ from generate_charts import generate_charts
 MINIMUM_GENE_LENGTH = 2
 
 def main():
-    gene_length_to_middle_split_convergences, 
+    (gene_length_to_middle_split_convergences, 
     gene_length_to_random_split_convergences,
-    gene_length_to_random_split_mutate_convergences = {}, {}, {}
+    gene_length_to_random_split_mutate_convergences) = {}, {}, {}
 
     gene_length_low = MINIMUM_GENE_LENGTH
     gene_length_high = 100
@@ -21,22 +21,22 @@ def main():
 
     for gene_length in range(gene_length_low, gene_length_high, step_size):
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
-        perfect_population = ['1'*gene_length for _ in range(POPULATION_SIZE)]
+        perfect_chromosome = '1'*gene_length
        
         convergence_for_middle_split = genetic_evolution(population = population, 
-                                                         perfect_population = perfect_population,
+                                                         perfect_chromosome = perfect_chromosome,
                                                          gene_split_method = split_genes_middle, 
                                                          gene_length = gene_length,
                                                          mutate_children = False)
         
         convergence_for_random_split = genetic_evolution(population = population, 
-                                                         perfect_population = perfect_population,
+                                                         perfect_chromosome = perfect_chromosome,
                                                          gene_split_method = split_genes_random, 
                                                          gene_length = gene_length,
                                                          mutate_children = False)
         
         convergence_for_random_split_mutate = genetic_evolution(population = population, 
-                                                         perfect_population = perfect_population,
+                                                         perfect_chromosome = perfect_chromosome,
                                                          gene_split_method = split_genes_random, 
                                                          gene_length = gene_length,
                                                          mutate_children = True)

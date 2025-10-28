@@ -2,10 +2,10 @@ from constants import POPULATION_SIZE
 from repopulate import repopulate
 from mutate import mutate
 
-def genetic_evolution(population, perfect_population, gene_split_method, gene_length, mutate_children: bool):
+def genetic_evolution(population, perfect_chromosome, gene_split_method, gene_length, mutate_children: bool):
     epochs, epochs_w_no_progress = 0, 0
     
-    while population != perfect_population:
+    while perfect_chromosome not in population:
         total_1s = sum(gene.count('1') for gene in population)
         
         population_by_fitness_scores = sorted(population, key = lambda gene: gene.count('1'))
