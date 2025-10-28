@@ -24,7 +24,7 @@ def genetic_evolution(population, perfect_chromosome, gene_split_method, gene_le
         
         if total_1s == new_1s_count:
             epochs_w_no_progress += 1
-        if epochs_w_no_progress == 25:
+        if epochs_w_no_progress == 30:
             return 0
 
         epochs += 1
