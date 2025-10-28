@@ -7,8 +7,8 @@ def generate_charts(middle_split_dict, random_split_dict, random_split_mutate_di
         plt.figure(figsize=(12, 9))
 
         plt.plot(random_split_dict.keys(), random_split_dict.values(), label = 'Random Crossover')
+        plt.plot(random_split_mutate_dict.keys(), random_split_mutate_dict.values(), label = 'Random Crossover w/Mutation')
         plt.plot(middle_split_dict.keys(), middle_split_dict.values(), label = 'Middle Crossover')
-        plt.plot(random_split_mutate_dict.keys(), random_split_mutate_dict.values(), label = 'Middle Crossover w/Mutation')
 
         plt.title('Middle vs. Random Crossover vs. Random Crossover w/Mutation')
         plt.xlabel('Gene Length')
