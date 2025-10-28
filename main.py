@@ -1,5 +1,5 @@
 from imports import np, tqdm
-from constants import POPULATION_SIZE
+from constants import POPULATION_SIZE, GENETIC_OPERATORS
 from generate_population import generate_population
 from repopulate import split_genes_middle, split_genes_random
 from genetic_evolution import genetic_evolution
@@ -11,67 +11,37 @@ from generate_charts import generate_charts
 MINIMUM_GENE_LENGTH = 2
 
 def main():
-    (gene_length_to_middle_split_convergences, 
-    gene_length_to_random_split_convergences,
-    gene_length_to_random_split_mutate_convergences) = {}, {}, {}
+    gene_split_methods_funcs = [split_genes_middle, split_genes_middle, split_genes_random, split_genes_random]
+    mutate_children = [False, True, False, True]
+    gene_length_to_convergences = [{}, {}, {}, {}]
 
     gene_length_low = MINIMUM_GENE_LENGTH
     gene_length_high = 750
     step_size = 5
 
     for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):
+        file_paths = []
+        
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
         perfect_chromosome = '1'*gene_length
-       
-        convergence_for_middle_split = genetic_evolution(population = population, 
-                                                         perfect_chromosome = perfect_chromosome,
-                                                         gene_split_method = split_genes_middle, 
-                                                         gene_length = gene_length,
-                                                         mutate_children = False)
         
-        convergence_for_random_split = genetic_evolution(population = population, 
-                                                         perfect_chromosome = perfect_chromosome,
-                                                         gene_split_method = split_genes_random, 
-                                                         gene_length = gene_length,
-                                                         mutate_children = False)
+        for i, dict in enumerate(gene_length_to_convergences):
+            gene_length_to_convergences[i][gene_length] = genetic_evolution(population = population, 
+                                                                            perfect_chromosome = perfect_chromosome,
+                                                                            gene_split_method = gene_split_methods_funcs[i], 
+                                                                            gene_length = gene_length,
+                                                                            mutate_children = mutate_children[i])
+            
         
-        convergence_for_random_split_mutate = genetic_evolution(population = population, 
-                                                         perfect_chromosome = perfect_chromosome,
-                                                         gene_split_method = split_genes_random, 
-                                                         gene_length = gene_length,
-                                                         mutate_children = True)
-    
-        gene_length_to_middle_split_convergences[gene_length] = convergence_for_middle_split
-        gene_length_to_random_split_convergences[gene_length] = convergence_for_random_split
-        gene_length_to_random_split_mutate_convergences[gene_length] = convergence_for_random_split_mutate
+        for i in range(len(GENETIC_OPERATORS)):
+            file_path = (create_file_path(gene_length_low = gene_length_low,
+                                          gene_length_high = gene_length_high,
+                                          gene_split_method = GENETIC_OPERATORS[i]))
+            
+            save_dicts_to_yaml(file_path = file_path, 
+                               gene_to_convergence_dict = gene_length_to_convergences[i])
 
-    middle_split_file_path = create_file_path(gene_length_low = gene_length_low,
-                                              gene_length_high = gene_length_high,
-                                              gene_split_method = 'middle-split')
-
-    random_split_file_path = create_file_path(gene_length_low = gene_length_low,
-                                              gene_length_high = gene_length_high,
-                                              gene_split_method = 'random-split')
-    
-    random_split_mutate_file_path = create_file_path(gene_length_low = gene_length_low,
-                                              gene_length_high = gene_length_high,
-                                              gene_split_method = 'random-split-mutate')
-    
-    
-    save_dicts_to_yaml(file_path = middle_split_file_path, 
-                       gene_to_convergence_dict = gene_length_to_middle_split_convergences)
-    
-    save_dicts_to_yaml(file_path = random_split_file_path, 
-                       gene_to_convergence_dict = gene_length_to_random_split_convergences)
-    
-    save_dicts_to_yaml(file_path = random_split_mutate_file_path, 
-                       gene_to_convergence_dict = gene_length_to_random_split_mutate_convergences)
-
-    return (gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences, gene_length_to_random_split_mutate_convergences)
+    return gene_length_to_convergences
 
 if __name__ == '__main__':
-    (gene_length_to_middle_split_convergences, 
-    gene_length_to_random_split_convergences, 
-    gene_length_to_random_split_mutate_convergences) = main()
-    
-    generate_charts(gene_length_to_middle_split_convergences, gene_length_to_random_split_convergences, gene_length_to_random_split_mutate_convergences)
+    generate_charts(main())
