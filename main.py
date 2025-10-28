@@ -1,4 +1,4 @@
-from imports import np
+from imports import np, tqdm
 from constants import POPULATION_SIZE
 from generate_population import generate_population
 from repopulate import split_genes_middle, split_genes_random
@@ -19,7 +19,7 @@ def main():
     gene_length_high = 1_000
     step_size = 1
 
-    for gene_length in range(gene_length_low, gene_length_high, step_size):
+    for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
         perfect_chromosome = '1'*gene_length
        
