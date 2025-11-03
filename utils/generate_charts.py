@@ -1,7 +1,7 @@
 from imports import plt
-from constants import PROJECT_DIRECTORY
+from constants import MINIMUM_GENE_LENGTH, MAXIMUM_GENE_LENGTH, PROJECT_DIRECTORY
 
-FIGURE_PATH = PROJECT_DIRECTORY / 'convergence plots' / 'plot.png'
+FIGURE_PATH = PROJECT_DIRECTORY / 'convergence plots' / f'{MINIMUM_GENE_LENGTH}-{MAXIMUM_GENE_LENGTH} Gene Length'
 
 def generate_charts(genetic_operators_dict):
         plt.figure(figsize=(12, 9))

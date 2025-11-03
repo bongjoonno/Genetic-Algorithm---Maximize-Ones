@@ -1,11 +1,8 @@
-from imports import yaml
+from imports import pickle
 from constants import MINIMUM_GENE_LENGTH, MAXIMUM_GENE_LENGTH, PROJECT_DIRECTORY
 
-LOGGING_DIRECTORY = PROJECT_DIRECTORY / 'convergence_data'
+LOGGING_PATH = PROJECT_DIRECTORY / 'convergence_data' / f'{MINIMUM_GENE_LENGTH}-{MAXIMUM_GENE_LENGTH}.pkl'
 
-def create_file_path(gene_split_method):
-    return LOGGING_DIRECTORY / f'{MINIMUM_GENE_LENGTH}-{MAXIMUM_GENE_LENGTH} {gene_split_method}.yaml'
-
-def save_dicts_to_yaml(file_path, gene_to_convergence_dict):
-    with open(file_path, 'w') as f:
-        yaml.dump(gene_to_convergence_dict, f)
+def save_dicts_to_pkl(genetic_operators_dict):
+    with open(LOGGING_PATH, 'wb') as f:
+        pickle.dump(genetic_operators_dict, f)

@@ -3,7 +3,6 @@ from constants import POPULATION_SIZE, MINIMUM_GENE_LENGTH, MAXIMUM_GENE_LENGTH,
 from genetic_algorithm.generate_population import generate_population
 from genetic_algorithm.repopulate import split_genes_middle, split_genes_random
 from genetic_algorithm.genetic_evolution import genetic_evolution
-from utils.log import create_file_path, save_dicts_to_yaml
 
 def run_full_simulation():
     genetic_operators_dict = {'Middle Crossover' : 
@@ -37,11 +36,5 @@ def run_full_simulation():
                                                                                                         gene_split_method = information_dict['gene_split_function'], 
                                                                                                         gene_length = gene_length,
                                                                                                         mutate_children = information_dict['mutate_children'])
-        
-    for operator, information_dict in genetic_operators_dict.items():
-        file_path = (create_file_path(gene_split_method = operator))
-        
-        save_dicts_to_yaml(file_path = file_path, 
-                            gene_to_convergence_dict = information_dict['gene_lengths_to_convergences'])
     
     return genetic_operators_dict
