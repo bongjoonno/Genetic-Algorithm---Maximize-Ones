@@ -1,10 +1,10 @@
 from imports import yaml
-from constants import PROJECT_DIRECTORY
+from constants import MINIMUM_GENE_LENGTH, MAXIMUM_GENE_LENGTH, PROJECT_DIRECTORY
 
 LOGGING_DIRECTORY = PROJECT_DIRECTORY / 'convergence_data'
 
-def create_file_path(gene_length_low, gene_length_high, gene_split_method):
-    return LOGGING_DIRECTORY / f'{gene_length_low}-{gene_length_high} {gene_split_method}.yaml'
+def create_file_path(gene_split_method):
+    return LOGGING_DIRECTORY / f'{MINIMUM_GENE_LENGTH}-{MAXIMUM_GENE_LENGTH} {gene_split_method}.yaml'
 
 def save_dicts_to_yaml(file_path, gene_to_convergence_dict):
     with open(file_path, 'w') as f:
