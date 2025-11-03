@@ -3,14 +3,14 @@ from constants import POPULATION_SIZE, GENETIC_OPERATORS
 from genetic_algorithm.generate_population import generate_population
 from genetic_algorithm.repopulate import split_genes_middle, split_genes_random
 from genetic_algorithm.genetic_evolution import genetic_evolution
-from log import create_file_path, save_dicts_to_yaml
-from generate_charts import generate_charts
+from utils.log import create_file_path, save_dicts_to_yaml
+from utils.generate_charts import generate_charts
 
 
 # Length of Gene must be > 2 as parental splitting is not possible without at least one gene per parent (e.g. at least 2)
 MINIMUM_GENE_LENGTH = 2
 
-def main():
+def full_simulation():
     gene_split_methods_funcs = [split_genes_middle, split_genes_middle, split_genes_random, split_genes_random]
     mutate_children = [False, True, False, True]
     gene_length_to_convergences = [{} for _ in range(4)]
@@ -40,6 +40,3 @@ def main():
                             gene_to_convergence_dict = gene_length_to_convergences[i])
 
     return gene_length_to_convergences
-
-if __name__ == '__main__':
-    generate_charts(main())
