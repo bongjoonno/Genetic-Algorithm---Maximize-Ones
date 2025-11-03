@@ -1,8 +1,8 @@
 from imports import np, tqdm
 from constants import POPULATION_SIZE, GENETIC_OPERATORS
-from generate_population import generate_population
-from repopulate import split_genes_middle, split_genes_random
-from genetic_evolution import genetic_evolution
+from genetic_algorithm.generate_population import generate_population
+from genetic_algorithm.repopulate import split_genes_middle, split_genes_random
+from genetic_algorithm.genetic_evolution import genetic_evolution
 from log import create_file_path, save_dicts_to_yaml
 from generate_charts import generate_charts
 
@@ -13,10 +13,10 @@ MINIMUM_GENE_LENGTH = 2
 def main():
     gene_split_methods_funcs = [split_genes_middle, split_genes_middle, split_genes_random, split_genes_random]
     mutate_children = [False, True, False, True]
-    gene_length_to_convergences = [{}, {}, {}, {}]
+    gene_length_to_convergences = [{} for _ in range(4)]
 
-    gene_length_low = 2
-    gene_length_high = 1_000
+    gene_length_low = MINIMUM_GENE_LENGTH
+    gene_length_high = 100
     step_size = 5
 
     for gene_length in tqdm(range(gene_length_low, gene_length_high, step_size)):

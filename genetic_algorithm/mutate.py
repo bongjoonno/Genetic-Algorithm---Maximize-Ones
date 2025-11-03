@@ -13,8 +13,3 @@ def mutate(children, gene_length):
             current_gene = child[index_of_gene_to_mutate]
             children[i] = child[:index_of_gene_to_mutate] + OPPOSITE_GENE_MAP[current_gene] + child[index_of_gene_to_mutate+1:]
     return children
-
-
-
-if __name__ == '__main__':
-    print(mutate(['11'], 3))

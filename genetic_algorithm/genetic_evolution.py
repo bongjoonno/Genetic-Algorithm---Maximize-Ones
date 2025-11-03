@@ -1,6 +1,6 @@
 from constants import POPULATION_SIZE
-from repopulate import repopulate
-from mutate import mutate
+from genetic_algorithm.repopulate import repopulate
+from genetic_algorithm.mutate import mutate
 
 def genetic_evolution(population, perfect_chromosome, gene_split_method, gene_length, mutate_children: bool):
     epochs, epochs_w_no_progress = 0, 0
