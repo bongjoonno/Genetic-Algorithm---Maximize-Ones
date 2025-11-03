@@ -3,11 +3,13 @@ from constants import PROJECT_DIRECTORY, GENETIC_OPERATORS
 
 FIGURE_PATH = PROJECT_DIRECTORY / 'convergence plots' / 'plot.png'
 
-def generate_charts(gene_length_to_convergences):
+def generate_charts():
         plt.figure(figsize=(12, 9))
         
-        for i, gene_length_to_convergence in enumerate(gene_length_to_convergences):
-                plt.plot(gene_length_to_convergence.keys(), gene_length_to_convergence.values(), label = GENETIC_OPERATORS[i])
+        for operator, information_dict in GENETIC_OPERATORS:
+                plt.plot(information_dict['gene_lengths_to_convergences'].keys(), 
+                         information_dict['gene_lengths_to_convergences'].values(), 
+                         label = operator)
 
         plt.title('Genetic Operators | OneMax')
         plt.xlabel('Gene Length')

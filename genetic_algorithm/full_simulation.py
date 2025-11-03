@@ -11,10 +11,6 @@ from utils.generate_charts import generate_charts
 MINIMUM_GENE_LENGTH = 2
 
 def full_simulation():
-    gene_split_methods_funcs = [split_genes_middle, split_genes_middle, split_genes_random, split_genes_random]
-    mutate_children = [False, True, False, True]
-    gene_length_to_convergences = [{} for _ in range(4)]
-
     gene_length_low = MINIMUM_GENE_LENGTH
     gene_length_high = 100
     step_size = 5
@@ -23,20 +19,18 @@ def full_simulation():
         population = generate_population(POPULATION_SIZE, gene_length = gene_length)
         perfect_chromosome = '1'*gene_length
         
-        for i in range(len(gene_length_to_convergences)):
-            gene_length_to_convergences[i][gene_length] = genetic_evolution(population = population, 
-                                                                            perfect_chromosome = perfect_chromosome,
-                                                                            gene_split_method = gene_split_methods_funcs[i], 
-                                                                            gene_length = gene_length,
-                                                                            mutate_children = mutate_children[i])
+        for operator, information_dict in GENETIC_OPERATORS.items():
+            GENETIC_OPERATORS[operator]['gene_length_to_convergences'][gene_length] = genetic_evolution(population = population, 
+                                                                                                        perfect_chromosome = perfect_chromosome,
+                                                                                                        gene_split_method = information_dict['gene_split_function'], 
+                                                                                                        gene_length = gene_length,
+                                                                                                        mutate_children = information_dict['mutate_children'])
             
         
-    for i in range(len(GENETIC_OPERATORS)):
+    for operator, information_dict in GENETIC_OPERATORS.items():
         file_path = (create_file_path(gene_length_low = gene_length_low,
-                                        gene_length_high = gene_length_high,
-                                        gene_split_method = GENETIC_OPERATORS[i]))
+                                      gene_length_high = gene_length_high,
+                                      gene_split_method = operator))
         
         save_dicts_to_yaml(file_path = file_path, 
-                            gene_to_convergence_dict = gene_length_to_convergences[i])
-
-    return gene_length_to_convergences
+                            gene_to_convergence_dict = information_dict['gene_lengths_to_convergences'])
