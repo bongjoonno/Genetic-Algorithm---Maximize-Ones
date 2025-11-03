@@ -1,7 +1,7 @@
 from imports import plt
-from constants import MAIN_DIRECTORY, GENETIC_OPERATORS
+from constants import PROJECT_DIRECTORY, GENETIC_OPERATORS
 
-FIGURE_PATH = f'{MAIN_DIRECTORY}\\convergence plots\\plot.png'
+FIGURE_PATH = PROJECT_DIRECTORY / 'convergence plots' / 'plot.png'
 
 def generate_charts(gene_length_to_convergences):
         plt.figure(figsize=(12, 9))
